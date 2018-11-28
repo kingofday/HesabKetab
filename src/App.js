@@ -1,10 +1,13 @@
 import React from 'react';
+import {I18nManager} from 'react-native';
 import { Router , Scene, Lightbox, Drawer } from 'react-native-router-flux';
+I18nManager.forceRTL(true);
 //Coms
 import SideMenu from './components/SideMenu';
 import Splash from './pages/Splash';
 import Home from './pages/Home';
 import MessageLightbox from './components/LightBoxes/MessageLightBox';
+
 
 export default class App extends React.Component {
   render() {

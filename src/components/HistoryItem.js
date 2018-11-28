@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
-import {View,Text } from 'react-native';
+import {Card, CardItem,Body,Text  } from 'native-base';
+
 export default class HistoryItem extends React.Component{
     render(){
         var item = this.props.item;
         return (
-            <View style={{flex:1,backgroundColor:'#ffffff',direction:"rt"}}>
-                <Text style={{color:'#000000'}}>{item.title}</Text>
-                <Text>{item.date}</Text>
-            </View>
+            <Card style={{flex:1,backgroundColor:'#ffffff',direction:"rtl"}}>
+                <CardItem >
+                    <Body>
+                        <Text style={{color:'#000000'}}>{item.title}</Text>
+                        <Text>{item.date}</Text>
+                    </Body>
+                </CardItem>
+            </Card>
         );
     }
 }
