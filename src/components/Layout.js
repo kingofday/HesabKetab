@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Content, Header, Footer, FooterTab, Title, Button, Text, Right, Body, Icon } from 'native-base';
+import { Container, Content, Header, Footer, FooterTab, Title, Button, Text, Right, Left ,Body, Icon } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
+import { Actions } from 'react-native-router-flux';
 
 export default class HeaderExample extends Component {
     render() {
@@ -9,11 +10,11 @@ export default class HeaderExample extends Component {
             header =
                 (
                     <Header>
-                        <Right>
-                            <Button transparent>
+                        <Left>
+                            <Button transparent onPress={()=>Actions.drawerOpen()}>
                                 <Icon name='menu' />
                             </Button>
-                        </Right>
+                        </Left>
                         <Body>
                             <Title>{this.props.title}</Title>
                         </Body>

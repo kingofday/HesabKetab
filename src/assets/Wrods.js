@@ -1,5 +1,6 @@
 export default Words ={
-    DefineUnits:'تعریف واحد',
+    DefineUnit:'تعریف واحد',
     Calculate:'محاسبه',
-
+    Name:'نام',
+    PeopleCount:'تعداد نفرات',
 }

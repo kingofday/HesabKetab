@@ -6,8 +6,9 @@ I18nManager.forceRTL(true);
 import SideMenu from './components/SideMenu';
 import Splash from './pages/Splash';
 import Home from './pages/Home';
+import DefineUnit from './pages/DefineUnit';
 import MessageLightbox from './components/LightBoxes/MessageLightBox';
-
+import Words from './assets/Wrods';
 
 export default class App extends React.Component {
   render() {
@@ -19,10 +20,10 @@ export default class App extends React.Component {
               <Scene hideNavBar>
                 <Drawer key="drawer" 
                   contentComponent={SideMenu}
-                  drawerPosition="right"
-                >
+                  drawerPosition="right">
                   <Scene hideNavBar>
-                      <Scene key="home" component={Home} title="Home" initial/>
+                      <Scene key="home" component={Home} title={Words.Home} initial/>
+                      <Scene key="defineUnit" component={DefineUnit} title={Words.DefineUnit}/>
                   </Scene>
                 </Drawer>
               </Scene>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, FlatList, I18nManager } from 'react-native';
+import { View, FlatList } from 'react-native';
 import HistoryItem from '../components/HistoryItem';
-I18nManager.forceRTL(true);
 //coms
 import Layout from '../components/Layout'
 

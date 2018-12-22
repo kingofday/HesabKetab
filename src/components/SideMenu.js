@@ -1,23 +1,31 @@
-import React, {Component} from 'react';
-import { View,TouchableOpacity,Text } from 'react-native';
-import { Row } from 'native-base';
+import React from 'react';
+import { Text,Icon, Item, Content } from 'native-base';
+import {Image} from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
+//coms
+import words from '../assets/Wrods';
+import {drawer} from '../assets/Styles/Index';
 
+EStyleSheet.build();
 export default class SideMenu extends React.Component {
-    componentWillMount(){
+    componentWillMount() {
         // this.setState({
-           
+
         // });
     }
-    render(){
+    render() {
         return (
-        <View>
-            <Row>
-                <TouchableOpacity>
-                    <Text>ok</Text>
-                </TouchableOpacity>
-            </Row>
-        </View>
+            <Content>
+                <Item style={drawer.header}>
+                    <Image style={drawer.headerImage} source={require("../assets/images/home.png")}/>
+                </Item>
+                <Item style={drawer.item} onPress={()=>Actions.defineUnit()}>
+                    <Icon name="md-add" style={drawer.routeIcon} />
+                    <Text style={drawer.routeName}>{words.DefineUnit}</Text>
+                </Item>
+            </Content>
         );
     }
 }

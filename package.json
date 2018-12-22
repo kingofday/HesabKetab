@@ -12,7 +12,9 @@
     "native-base": "^2.8.1",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "^0.57.1",
+    "react-native-extended-stylesheet": "^0.10.0",
     "react-native-linear-gradient": "^2.4.4",
+    "react-native-materialui-textfield": "^0.13.2",
     "react-native-router-flux": "^4.0.0",
     "schedule": "^0.4.0"
   },
