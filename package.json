@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
+    "firebase": "^5.7.1",
     "native-base": "^2.8.1",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "^0.57.1",
@@ -16,6 +17,7 @@
     "react-native-linear-gradient": "^2.4.4",
     "react-native-materialui-textfield": "^0.13.2",
     "react-native-router-flux": "^4.0.0",
+    "react-native-sqlite-storage": "^3.3.9",
     "schedule": "^0.4.0"
   },
   "devDependencies": {

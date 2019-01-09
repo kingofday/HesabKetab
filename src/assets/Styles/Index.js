@@ -1,7 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 export const drawer = EStyleSheet.create({
     header:{
-        height:100,
+        height:150,
         textAlign:'center',
         justifyContent:"center",
         backgroundColor:'#54a0ff',
@@ -27,14 +27,32 @@ export const drawer = EStyleSheet.create({
     }
 });
 
-export const common = EStyleSheet.create({
+export const util = EStyleSheet.create({
     underlineBorder:{
         borderColor:'#ced4da',
     },
     underlineActiveBorder:{
         borderColor:'#4285f4'
+    },
+    statndard:{
+        p:{
+            padding:15
+        },
+        p_t:{
+            paddingTop:15
+        },
+        m:{
+            margin:15
+        },
+        m_t:{
+            marginTop:15
+        },
+        button:{
+            fontSize:10
+        }
     }
+
 });
 export default styles = {
-    common
+    util
 };

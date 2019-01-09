@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { } from 'react-native';
-import { Content, Form, Item, Input, Label, Button, Text,Picker } from 'native-base';
+import { Content, Form, Item, Input, Label, Button, Text,Picker,Icon } from 'native-base';
 import { TextField } from 'react-native-materialui-textfield';
+
 //coms
 import Layout from '../components/Layout'
 import words from '../assets/Wrods';
@@ -10,8 +11,8 @@ export default class SaveDebt extends React.Component {
     componentWillMount() {
         this.setState({
             unit: {
-                name: '',
-                peopleCount: '',
+                price: 0,
+                withWeight: false
             }
         });
     }
@@ -19,40 +20,35 @@ export default class SaveDebt extends React.Component {
     _saveUnit(){
         console.log(this.state);
     }
+    _setUnit(val){
+        console.log(this.state);
+    }
+    _saveDebt(){
+        console.log(this.state);
+    }
+
     render() {
+        //let items = 
         return (
             <Layout>
                 <Content padder>
 
                     <Form>
-                    <Picker
-              mode="dropdown"
-              iosIcon={<Icon name="ios-arrow-down-outline" />}
-              placeholder="Select your SIM"
-              placeholderStyle={{ color: "#bfc6ea" }}
-              placeholderIconColor="#007aff"
-              style={{ width: undefined }}
-              selectedValue={this.state.selected}
-              onValueChange={this.onValueChange.bind(this)}
-            >
-              <Picker.Item label="Wallet" value="key0" />
-              <Picker.Item label="ATM Card" value="key1" />
-              <Picker.Item label="Debit Card" value="key2" />
-              <Picker.Item label="Credit Card" value="key3" />
-              <Picker.Item label="Net Banking" value="key4" />
-            </Picker>
 
                         <TextField
                             label={words.name}
-                            onChangeText={(txt) => this.setState((prev) => ({ ...prev, name: txt }))}
+                            keyboardType='numeric'
+                            onChangeText={(txt) => this.setState((prev) => ({ ...prev, price: txt }))}
                         />
-                        <TextField
-                            label={words.peopleCount}
-                            onChangeText={(txt) => this.setState((prev) => ({ ...prev, peopleCount: txt }))}
-                        />
+                        <Item>
+                            <CheckBox checked={false} />
+                            <Body>
+                                <Text>Discussion with Client</Text>
+                            </Body>
+                        </Item>
 
                         <Item>
-                            <Button onPress={() =>  _saveUnit().bind(this)}>
+                            <Button onPress={() =>  _saveDebt().bind(this)}>
                                 <Text></Text>
                             </Button>
                         </Item>

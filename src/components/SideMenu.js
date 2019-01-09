@@ -25,6 +25,10 @@ export default class SideMenu extends React.Component {
                     <Icon name="md-add" style={drawer.routeIcon} />
                     <Text style={drawer.routeName}>{words.DefineUnit}</Text>
                 </Item>
+                <Item style={drawer.item} onPress={()=>Actions.saveDebt()}>
+                    <Icon name="cash" style={drawer.routeIcon} />
+                    <Text style={drawer.routeName}>{words.SaveDebt}</Text>
+                </Item>
             </Content>
         );
     }
