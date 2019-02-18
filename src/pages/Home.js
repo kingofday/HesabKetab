@@ -6,7 +6,6 @@ import Layout from '../components/Layout'
 
 export default class Home extends React.Component {
     componentWillMount() {
-        
         // this.setState({
 
         // });

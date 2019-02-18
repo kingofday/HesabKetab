@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { AsyncStorage } from "react-native"
 import { Content, Form, Item, Input, Label, Button, Text, Icon } from 'native-base';
 import { TextField } from 'react-native-materialui-textfield';
-import {addUnit,removeUnit,getUnit} from '../Businness/Service'
+import { unit } from '../Businness/domain'
+import { add } from '../Businness/db'
 //coms
 import Layout from '../components/Layout'
 import words from '../assets/Wrods';
@@ -10,33 +11,29 @@ import words from '../assets/Wrods';
 export default class DefineUnit extends React.Component {
     componentWillMount() {
         this.setState({
-            unit: {
-                name: '',
-                peopleCount: '',
-            }
+            unit: new unit('', '')
         });
     }
 
-    _saveUnit(){
-        console.log(this.state.unit);
-        addUnit(this.state.unit);
-
+    _saveUnit() {
+        let u = this.state.unit;
+        add(new unit(u.name,u.peopleCount));
     }
     render() {
         return (
             <Layout>
                 <Content padder>
 
-                        <TextField
-                            label={words.Name}
-                            onChangeText={(txt) => this.setState((prev) => ({ ...prev, name: txt }))}
-                        />
-                        <TextField
-                            label={words.PeopleCount}
-                            onChangeText={(txt) => this.setState((prev) => ({ ...prev, peopleCount: txt }))}
-                        />
+                    <TextField  
+                        label={words.Name}
+                        onChangeText={(txt) => this.setState((prev) => ({ ...prev, unit: { ...prev.unit, name: txt } }))}
+                    />
+                    <TextField
+                        label={words.PeopleCount}
+                        onChangeText={(txt) => this.setState((prev) => ({ ...prev, unit: { ...prev.unit, peopleCount: txt } }))}
+                    />
                     <Item p>
-                        <Button iconLeft success onPress={() =>  this._saveUnit().bind(this)}>
+                        <Button iconLeft success onPress={() => this._saveUnit()}>
                             <Icon name="md-add" />
                             <Text>{words.Submit}</Text>
                         </Button>

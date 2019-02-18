@@ -34,22 +34,20 @@ export const util = EStyleSheet.create({
     underlineActiveBorder:{
         borderColor:'#4285f4'
     },
-    statndard:{
-        p:{
-            padding:15
-        },
-        p_t:{
-            paddingTop:15
-        },
-        m:{
-            margin:15
-        },
-        m_t:{
-            marginTop:15
-        },
-        button:{
-            fontSize:10
-        }
+    p:{
+        padding:15
+    },
+    p_t:{
+        paddingTop:15
+    },
+    m:{
+        margin:15
+    },
+    m_t:{
+        marginTop:15
+    },
+    button:{
+        fontSize:10
     }
 
 });

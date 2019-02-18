@@ -8,15 +8,17 @@ export default class Rep{
 
 export class unit{
     constructor(name,peopleCount){
+        this.id = null;
         this.name = name;
         this.peopleCount = peopleCount;
     }
 }
 
-export class debt{
+export class cost{
     constructor(title,amount,date){
+        this.id = null;
         this.title = title;
-        this.title = amount;
+        this.amount = amount;
         this.date = date;
     }
 }
