@@ -17,6 +17,9 @@
     "react-native-materialui-textfield": "^0.13.2",
     "react-native-router-flux": "^4.0.0",
     "react-native-sqlite-storage": "^3.3.9",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
     "schedule": "^0.4.0"
   },
   "devDependencies": {

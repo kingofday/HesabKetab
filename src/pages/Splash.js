@@ -14,11 +14,12 @@ export default class Splash extends React.Component {
     }
 
     render() {
-        let t = new unit('unit7',12);
-        //t.id = 5
+        let t = new unit('واجد دوم',3);
+        //t.id = 1
         Create(t);
-        //Update('unit',t);
-        Read('unit', (d) => { console.log(d); });
+       // Update('unit',t);
+        
+        Read('unit', (d) => { console.log('units are:');console.log(d); });
         return (
             <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={{ flex: 1, flexDirection: 'row' }}>
                 <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

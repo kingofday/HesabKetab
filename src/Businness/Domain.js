@@ -7,10 +7,10 @@ export default class Rep{
 }
 
 export class unit{
-    constructor(name,peopleCount){
+    constructor(name,count){
         this.id = null;
         this.name = name;
-        this.peopleCount = peopleCount;
+        this.count = count;
     }
 }
 

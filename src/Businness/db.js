@@ -3,11 +3,11 @@ var okCallback = function (p) {
   console.log('db opt is successful');
 }
 var errorCallback = function (e) {
-  console.log('e :');
+  console.log('db otp failed with error:');
   console.log(e);
 }
 
-var db = openDatabase({ name: 'test.db', createFromLocation: '~hk.db' }, okCallback, errorCallback);
+var db = openDatabase({ name: 'test.db', createFromLocation: '~HK.db' }, okCallback, errorCallback);
 
 export const Create = (item, success, fail) => {
   let keys = Object.keys(item).filter(x => x != 'id');
