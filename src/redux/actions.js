@@ -1,18 +1,47 @@
-export const actionType = {
-    changeHeader:'changeHeader',
-    home:'home'
+export default actionTypes = {
+    selectRow:'selectRowّ',
+    deselectRow:'deselectRow',
+    getCosts:'getCosts',
+    selectCost: 'selectCost',
+    deselectCost: 'deselectCost',
+    home: 'home'
 };
-export const actionLayout = (customHeader, header) => ({
-    type: actionType.changeHeader,
+
+export const getCosts = (items) => ({
+    type: actionTypes.getCosts,
+    payload: {items}
+})
+export const selectRow = (id) => ({
+    type: actionTypes.selectRow,
     payload: {
-        customHeader,
-        header
+        id
     }
 })
 
-export const actionLayout = (customHeader, header) => ({
-    type: actionType.home,
+export const deselectRow = (id) => ({
+    type: actionTypes.deselectRow,
     payload: {
-        
+        id
+    }
+})
+
+export const selectCost = (id) => ({
+    type: actionTypes.selectCost,
+    payload: {
+        id
+    }
+})
+
+export const deselectCost = (id) => ({
+    type: actionTypes.deselectCost,
+    payload: {
+        id
+    }
+})
+
+export const actionHome = () => ({
+    type: actionTypes.home,
+    payload: {
+
     }
 })

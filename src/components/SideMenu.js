@@ -21,11 +21,11 @@ export default class SideMenu extends React.Component {
                 <Item style={drawer.header}>
                     <Image style={drawer.headerImage} source={require("../assets/images/home.png")}/>
                 </Item>
-                <Item style={drawer.item} onPress={()=>Actions.defineUnit()}>
+                <Item style={drawer.item} onPress={()=>Actions.unitManage()}>
                     <Icon name="md-add" style={drawer.routeIcon} />
                     <Text style={drawer.routeName}>{words.DefineUnit}</Text>
                 </Item>
-                <Item style={drawer.item} onPress={()=>Actions.saveDebt()}>
+                <Item style={drawer.item} onPress={()=>Actions.defineCost()}>
                     <Icon name="cash" style={drawer.routeIcon} />
                     <Text style={drawer.routeName}>{words.SaveDebt}</Text>
                 </Item>

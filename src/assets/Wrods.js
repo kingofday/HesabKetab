@@ -6,5 +6,7 @@ export default words ={
     PeopleCount:'تعداد نفرات',
     Error:'خطایی رخ داده است، دوباره سعی نمایید',
     Submit:'ثبت',
-
+    Count:'تعداد',
+    Unit:'واحد',
+    PeopleUnit:'نفر',
 }

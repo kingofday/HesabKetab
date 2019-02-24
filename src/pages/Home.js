@@ -1,29 +1,37 @@
-import React, { Component } from 'react';
-import { View, Text } from 'native-base';
+import React from 'react';
+import { View} from 'native-base';
 import { FlatList } from 'react-native';
-import HistoryItem from '../components/HistoryItem';
-//comps
-import { Read } from '../components/Layout'
-import Layout from '../components/Layout'
+import { connect } from 'react-redux';
 
-export default class Home extends React.Component {
+//comps
+import { GetAll } from '../Data/db'
+import HistoryItem from '../components/HistoryItem';
+import Layout from '../components/Layout'
+import { getCosts, selectRow, deselectRow } from '../redux/actions'
+
+class Home extends React.Component {
     componentWillMount() {
-        this.setState({ header: null });
+        GetAll('cost', this._getCost);
     }
-    _loadInfo() {
-        return [{ key: "1", id: 1, title: 'test1', date: '1397/08/20' }, { key: "2", id: 2, title: 'test2', date: '1397/08/21' }];
+    _getCost = (items) => {
+        this.props.getCosts(items);
     }
-    _changeHeader = (id, selected) => {
-        console.log(selected);
+    _onPressItem(id, selected) {
+        console.log('select is: ' + selected);
+        if (selected) this.props.selectRow(id);
+        else this.props.deselectRow(id);
     }
 
     render() {
+        const data = this.props.items.map(x => ({ ...x, selected: false, key: x.id.toString() }))
         return (
-            <Layout header={this.state.header}>
-                <View>
-                    <FlatList data={this._loadInfo()}
-                        renderItem={(item) => (<HistoryItem item={item.item} changeHeader={this._changeHeader} />)}>
-
+            <Layout>
+                <View style={{ flexDirection: "column" }}>
+                    <FlatList
+                        data={data}
+                        renderItem={(item) => (<HistoryItem item={item.item} onPressItem={this._onPressItem.bind(this)} />)}
+                        extraData={this.state}
+                    >
                     </FlatList>
                 </View>
 
@@ -32,3 +40,22 @@ export default class Home extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    //const { homeReducer } = state;
+    return { ...state.homeReducer };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getCosts: (items) => { dispatch(getCosts(items)); },
+        selectRow: (id) => { dispatch(selectRow(id)); },
+        deselectRow: (id) => { dispatch(deselectRow(id)); }
+        // select: (checked) => {
+
+        //     dispatch(addPlace(name))
+        // }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
