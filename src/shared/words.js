@@ -1,0 +1,18 @@
+export default words = {
+    DefineUnit: 'تعریف واحد',
+    SaveCost: 'ثبت هزینه',
+    Calculate: 'محاسبه',
+    Name: 'نام',
+    PeopleCount: 'تعداد نفرات',
+    Error: 'خطایی رخ داده است، دوباره سعی نمایید',
+    Submit: 'ثبت',
+    Count: 'تعداد',
+    Unit: 'واحد',
+    PeopleUnit: 'نفر',
+    RequiredField: 'این فیلد اجباری است',
+    Loading: 'در حال بارگذاری ...',
+    Title: 'عنوان',
+    Price: 'مبلغ',
+    InvalidPrice: 'مقدار ورودی معتبر نیست',
+    CostShare:'سهم هزینه',
+}

@@ -12,7 +12,7 @@ var db = openDatabase({ name: 'test.db', createFromLocation: '~HK.db' }, okCallb
 export const Add = (item, success, fail) => {
   let keys = Object.keys(item).filter(x => x != 'id');
   db.transaction(function (tx) {
-    tx.executeSql('delete from unit');
+    // tx.executeSql('delete from unit');
     tx.executeSql(
       `INSERT INTO ${item.constructor.name} (${keys.toString()}) VALUES (${keys.map(x => '?').toString()})`,
       keys.map(x => item[x]),
@@ -30,7 +30,7 @@ export const Add = (item, success, fail) => {
 
 export const GetAll = (tbl, callback) => {
   db.transaction(tx => {
-    tx.executeSql(`SELECT * FROM ${tbl}`, [], (tx, results) => {
+    tx.executeSql(`SELECT * FROM ${tbl} ORDER BY id DESC`, [], (tx, results) => {
       var temp = [];
       for (let i = 0; i < results.rows.length; ++i) {
         temp.push(results.rows.item(i));
@@ -41,17 +41,32 @@ export const GetAll = (tbl, callback) => {
   });
 }
 
-export const Find = (tbl, id, callback) => {
+export const Get = (tbl, limit, offset, callback) => {
   db.transaction(tx => {
-    tx.executeSql(`SELECT * FROM ${tbl} WHERE id = ?`, [id], (tx, results) => {
-      if (results.rows.length > 0) callback(results.rows.item(0));
-      else {
-        console.log(`db-->Find: item with id = ${id} not found!`);
-        callback(null);
+    tx.executeSql(`SELECT * FROM ${tbl} ORDER BY id DESC LIMIT ${limit} OFFSET ${offset}`, [], (tx, results) => {
+      var temp = [];
+      for (let i = 0; i < results.rows.length; ++i) {
+        temp.push(results.rows.item(i));
       }
+      if (callback) callback(temp);
+      return temp;
     });
   });
 }
+
+export const Find = (tbl, ids, callback) => {
+  db.transaction(tx => {
+    tx.executeSql(`SELECT * FROM ${tbl} WHERE ${ids.map(x=>('id = ?')).join(' OR ')}`, ids, (tx, results) => {
+      var temp = [];
+      for (let i = 0; i < results.rows.length; ++i) {
+        temp.push(results.rows.item(i));
+      }
+      if (callback) callback(temp);
+      return temp;
+    });
+  });
+}
+
 
 export const Update = (tbl, item, success, fail) => {
   let keys = Object.keys(item).filter(x => x !== 'id');
@@ -73,18 +88,18 @@ export const Update = (tbl, item, success, fail) => {
   });
 }
 
-export const Delete = (tbl, id, success, failed) => {
+export const Delete = (tbl, ids, success, failed) => {
   db.transaction(tx => {
     tx.executeSql(
-      `DELETE FROM  ${tbl} where user_id=?`,
-      [id],
+      `DELETE FROM  ${tbl} where id IN (${ids.map(x=>'?').join(',')})`,
+      ids,
       (tx, results) => {
         console.log('Results', results.rowsAffected);
         if (results.rowsAffected > 0) {
           if (success) success();
         } else {
           if (failed) failed();
-          else console.log(`db-->Delete: Please insert a valid ${tbl} Id`);
+          else console.log(`db-->Delete: Please insert a valid ${tbl} ids`);
         }
       }
     );

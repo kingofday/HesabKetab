@@ -1,17 +1,21 @@
 import React from 'react';
-import { I18nManager } from 'react-native';
+// import { I18nManager } from 'react-native';
+// I18nManager.forceRTL(true);
 import { Router, Scene, Lightbox, Drawer } from 'react-native-router-flux';
-I18nManager.forceRTL(true);
 import { connect, Provider } from 'react-redux';
-//Coms
-import SideMenu from './components/SideMenu';
-import Splash from './pages/Splash';
-import Home from './pages/Home';
-import UnitManage from './pages/UnitManage';
-import DefineCost from './pages/DefineCost';
-import MessageLightbox from './components/LightBoxes/MessageLightBox';
-import Words from './assets/Wrods';
-import appStore from "./redux/store";
+//routes
+import Home from './pages/home';
+import Splash from './pages/splash';
+import Result from './pages/result';
+import UnitManage from './pages/unit_manage';
+import MessageLightbox from './shared/comps/light_box/MessageLightBox';
+
+//comps
+import words from './shared/words';
+import appStore from "./shared/store";
+import SideMenu from './shared/comps/drawer';
+import AddCostLightBox from './pages/home/comps/AddCostLightBox';
+import AddUnitLightBox from './pages/unit_manage/comps/AddUnitLightBox';
 
 export default class App extends React.Component {
   render() {
@@ -28,9 +32,19 @@ export default class App extends React.Component {
                     contentComponent={SideMenu}
                     drawerPosition="right">
                     <Scene hideNavBar>
-                      <Scene key="home" component={Home} title={Words.Home}  />
-                      <Scene key="unitManage" component={UnitManage} title={Words.DefineUnit} initial/>
-                      <Scene key="defineCost" component={DefineCost} title={Words.SaveDebt} />
+                      <Lightbox hideNavBar initial>
+                        <Scene hideNavBar key="costManage">
+                          <Scene key="home" component={Home} title={words.Home} />
+                        </Scene>
+                        <Scene key="addCostLightBox" component={AddCostLightBox} />
+                      </Lightbox>
+                      <Lightbox hideNavBar>
+                        <Scene hideNavBar key="unitManage">
+                          <Scene component={UnitManage} title={words.DefineUnit} initial />
+                        </Scene>
+                        <Scene key="addUnitLightBox" component={AddUnitLightBox} />
+                      </Lightbox>
+                      <Scene key="result" component={Result} title={words.CostShare} />
                     </Scene>
                   </Drawer>
                 </Scene>
