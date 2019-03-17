@@ -5,6 +5,7 @@ import { View, Item, Text, Left, Right, CheckBox } from 'native-base';
 import { commaThousondSeperator } from '../../../shared/util';
 import commonStyles from '../../../shared/styles';
 import homeStyles from '../styles';
+import words from '../../../shared/words';
 
 export default class CostItem extends React.Component {
     componentWillMount() {
@@ -24,7 +25,10 @@ export default class CostItem extends React.Component {
                 </View>
                 <View style={{ flex: 0.7, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={[homeStyles.itemTitle, commonStyles.fontFa]}>{item.title}</Text>
-                    <Text>{commaThousondSeperator(item.price.toString())}</Text>
+                    <Text>
+                        {commaThousondSeperator(item.price.toString())}
+                        <Text style={commonStyles.fontFa}> {words.MoneyCurrency}</Text>
+                    </Text>
                 </View>
             </Item>
         );

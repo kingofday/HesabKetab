@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Icon, Button, View, Text } from 'native-base';
 import { TextField } from 'react-native-materialui-textfield';
@@ -20,13 +20,12 @@ export default class AddCostLightBox extends React.Component {
         let c = this.state.cost;
         if (!c.title)
             this.setState(prev => ({ ...prev, errors: { title: words.RequiredField } }));
-        else if (!c.price || Number.isInteger(c.price)) {
-            this.setState(prev => ({ ...prev, errors: { price: words.InvalidPrice } }));
 
-        }
+        else if (!c.price || Number.isInteger(c.price))
+            this.setState(prev => ({ ...prev, errors: { price: words.InvalidPrice } }));
         else {
             let dt = new Date();
-            Add(new cost(c.title, c.price,convertToJalali(dt.getFullYear(),dt.getMonth()+1,dt.getDate()).toString()), this.props.resetList);
+            Add('cost', new cost(c.title, c.price, convertToJalali(dt.getFullYear(), dt.getMonth() + 1, dt.getDate()).toString()), this.props.resetList);
             this.setState(prev => ({ ...prev, errors: { title: '' } }));
             this.inputs[0].clear();
             this.inputs[1].clear();

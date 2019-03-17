@@ -1,7 +1,5 @@
 //Comps
-const actionTypes = {
-    
-};
+
 
 const homeInit = {};
 export default homeReducer = (state = homeInit, action) => {

@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, ActivityIndicator, I18nManager } from 'react-native';
+import { View, Text, ActivityIndicator, TouchableOpacity,Image, Linking } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-I18nManager.forceRTL(true);
 import LinearGradient from 'react-native-linear-gradient';
 
 //comps
@@ -10,36 +9,30 @@ import words from '../../shared/words'
 import commonStyles from '../../shared/styles'
 import splashStyles from './styles'
 
-class Splash extends React.Component {
+export default class Splash extends React.Component {
     componentWillMount() {
         setTimeout(() => {
             Actions.reset('root');
         }, 3000)
     }
-
+    _redirectToKingofday() {
+        Linking.openURL("http://www.kingofday.ir").catch((err) => console.error('An error occurred', err));
+    }
     render() {
         return (
             <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={splashStyles.wrapper}>
-                <ActivityIndicator size="large" color="white" />
-                <View style={{ paddingTop: 20, }}>
-                    <Text style={[{ color: '#ffffff' }, commonStyles.fontFa]}>{words.Loading}</Text>
+                <View style={{ flex: 0.5, flexDirection: 'column', justifyContent: 'flex-end' }}>
+                    <ActivityIndicator size="large" color="white" />
+                    <View style={{ paddingTop: 20, }}>
+                        <Text style={[{ color: '#ffffff' }, commonStyles.fontFa]}>{words.Loading}</Text>
+                    </View>
                 </View>
+
+                <TouchableOpacity style={{ flex: 0.5, paddingBottom: 10,alignItems: 'center', justifyContent: 'flex-end' }} onPress={() => { this._redirectToKingofday() }}>
+                    <Image source={require('../../../src/assets/images/kingofday.png')}/>
+                    <Text style={{ color: 'white' }}>Kingofday.ir</Text>
+                </TouchableOpacity >
             </LinearGradient>
         );
     }
 }
-
-const mapStateToProps = state => {
-    return state
-}
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         select: (checked) => {
-
-//             dispatch(addPlace(name))
-//         }
-//     }
-// }
-
-export default connect(mapStateToProps)(Splash);

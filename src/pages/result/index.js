@@ -1,13 +1,15 @@
 import React from 'react';
 import { View, Spinner } from 'native-base';
 import { FlatList } from 'react-native'
+import { connect } from 'react-redux';
 
 //comps
 import { GetAll, Find } from '../../Data/db'
 import ResultItem from './comps/ResultItem';
 import Layout from '../../shared/comps/layout'
+import DefaultHeader from '../../shared/comps/layout/comps/DefaultHeader';
 
-export default class Result extends React.Component {
+class Result extends React.Component {
     constructor(props) {
         super(props);
         this.state = { items: [] };
@@ -32,6 +34,7 @@ export default class Result extends React.Component {
     render() {
         return (
             <Layout>
+                <DefaultHeader />
                 <View style={{ flex: 1, flexDirection: 'column' }}>
                     <FlatList
                         style={{}}
@@ -47,3 +50,8 @@ export default class Result extends React.Component {
     }
 
 }
+const mapStateToProps = state => {
+    return { ...state.resultReducer };
+}
+
+export default connect(mapStateToProps)(Result);

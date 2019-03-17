@@ -1,20 +1,19 @@
 import React from 'react';
 import { View, Fab, Icon } from 'native-base';
 import { FlatList } from 'react-native'
-
-import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 //comps
 import { Get, Delete, Find } from '../../Data/db'
 import UnitItem from './comps/UnitItem';
 import Layout from '../../shared/comps/layout'
-import { selectUnitRow, deselectUnitRow, resetHeader } from '../../shared/comps/layout/actions'
+import UnitManageHeader from './comps/Header';
+import DefaultHeader from '../../shared/comps/layout/comps/DefaultHeader';
 
-class UnitManage extends React.Component {
+export default class UnitManage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { items: [], ids: [], page: 1, loading: false };
+        this.state = { header: (<DefaultHeader title={words.DefineUnit} />), items: [], ids: [], page: 1, loading: false };
     }
 
     componentWillMount() {
@@ -32,13 +31,18 @@ class UnitManage extends React.Component {
     }
 
     _onPressItem(id, selected) {
+        let ids = [...this.state.ids];
         if (selected) {
-            this.props.selectUnitRow(id, this._Delete.bind(this));
-            this.setState(prev => ({ ...prev, ids: [...prev.ids, id] }));
+            ids.push(id);
+            this.setState(prev => ({ ...prev, header: (<UnitManageHeader title={words.DefineUnit} count={ids.length} delete={this._Delete.bind(this)} />), ids: ids }));
         }
         else {
-            this.props.deselectUnitRow(id, this._Delete.bind(this));
-            this.setState(prev => ({ ...prev, ids: prev.ids.filter(x => x !== id) }));
+            ids = [...ids.filter(x => x !== id)];
+            this.setState(prev => ({ ...prev, ids: ids }));
+            if (ids.length > 0)
+                this.setState(prev => ({ ...prev, header: (<UnitManageHeader title={words.DefineUnit} count={ids.length} delete={this._Delete.bind(this)} />) }));
+            else
+                this.setState(prev => ({ ...prev, header: (<DefaultHeader title={words.DefineUnit} />) }));
         }
 
     }
@@ -46,8 +50,8 @@ class UnitManage extends React.Component {
 
     _Delete() {
         Delete('unit', this.state.ids);
-        this.props.resetHeader();
         this._getUnits(true);
+        this.setState(prev => ({ ...prev, header: (<DefaultHeader title={words.DefineUnit} />) }));
     }
 
 
@@ -55,6 +59,7 @@ class UnitManage extends React.Component {
         const data = this.state.items.map(x => ({ ...x, selected: false, key: x.id.toString() }))
         return (
             <Layout>
+                {this.state.header}
                 <View style={{ flex: 1, flexDirection: 'column' }}>
                     <FlatList
                         style={{}}
@@ -82,18 +87,3 @@ class UnitManage extends React.Component {
         );
     }
 }
-
-const mapStateToProps = state => {
-    return { ...state.unitReducer };
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        selectUnitRow: (id, dlt) => { dispatch(selectUnitRow(id, dlt)); },
-        deselectUnitRow: (id, dlt) => { dispatch(deselectUnitRow(id, dlt)); },
-        resetHeader: () => { dispatch(resetHeader()); }
-
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UnitManage);

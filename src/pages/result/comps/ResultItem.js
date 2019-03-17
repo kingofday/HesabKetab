@@ -3,6 +3,7 @@ import { View, Item, Text, Left, Right, CheckBox } from 'native-base';
 
 //Comps
 import words from '../../../shared/words';
+import commonStyles from '../../../shared/styles';
 import { commaThousondSeperator } from '../../../shared/util';
 
 export default class UnitItem extends React.Component {
@@ -14,10 +15,13 @@ export default class UnitItem extends React.Component {
         return (
             <Item style={{ backgroundColor: '#ffffff', flexDirection: "row", padding: 7.5 }}>
                 <View style={{ flex: 0.6, flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ color: '#000000', paddingLeft: 15 }}>{item.name}</Text>
+                    <Text style={[{ color: '#000000', paddingLeft: 15 }, commonStyles.fontFa]}>{item.name}</Text>
                 </View>
                 <View style={{ flex: 0.4, flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ color: '#000000', paddingLeft: 15 }}>{commaThousondSeperator(item.price.toString())}</Text>
+                    <Text style={{ color: '#000000', paddingLeft: 15 }}>
+                        {commaThousondSeperator(item.price.toString())}
+                        <Text style={commonStyles.fontFa}> {words.MoneyCurrency}</Text>
+                    </Text>
                 </View>
             </Item>
         );

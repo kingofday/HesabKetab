@@ -11,13 +11,21 @@ import UnitManage from './pages/unit_manage';
 import MessageLightbox from './shared/comps/light_box/MessageLightBox';
 
 //comps
+import initDb from './Data/Init';
 import words from './shared/words';
 import appStore from "./shared/store";
 import SideMenu from './shared/comps/drawer';
 import AddCostLightBox from './pages/home/comps/AddCostLightBox';
 import AddUnitLightBox from './pages/unit_manage/comps/AddUnitLightBox';
+import EStyleSheet from 'react-native-extended-stylesheet';
+EStyleSheet.build({
+  '$inputActivecolor':'#0091ea'
+});
 
 export default class App extends React.Component {
+  componentWillMount(){
+    initDb();
+  }
   render() {
     const RouterWithRedux = connect()(Router);
     const store = appStore();

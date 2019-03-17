@@ -15,4 +15,5 @@ export default words = {
     Price: 'مبلغ',
     InvalidPrice: 'مقدار ورودی معتبر نیست',
     CostShare:'سهم هزینه',
+    MoneyCurrency:'تومان',
 }

@@ -1,15 +1,13 @@
-import { createStore} from 'redux';
+import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 
 //comps
-import LayoutReducer from './comps/layout/reducer';
 import homeReducer from '../pages/home/reducer';
-import unitManageReducer from '../pages/unit_manage/reducer';
+import resultReducer from '../pages/result/reducer';
 
 const appReducers = combineReducers({
-  LayoutReducer,
   homeReducer,
-  unitManageReducer
+  resultReducer
 })
 
 const appStore = () => {

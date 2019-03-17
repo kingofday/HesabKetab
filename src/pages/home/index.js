@@ -1,20 +1,23 @@
 import React from 'react';
 import { View, Fab, Icon } from 'native-base';
-import { FlatList } from 'react-native'
+import { FlatList, Alert } from 'react-native';
 
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 //comps
-import { Get, Delete, Find } from '../../Data/db'
+import { Get, Delete } from '../../Data/db'
 import CostItem from './comps/CostItem';
 import Layout from '../../shared/comps/layout'
-import { selectCostRow, deselectCostRow, resetHeader } from '../../shared/comps/layout/actions'
+import words from '../../shared/words';
+import HomeHeader from './comps/Header';
+import {setIds} from '../result/actions';
+import DefaultHeader from '../../shared/comps/layout/comps/DefaultHeader';
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { items: [], ids: [], page: 1, loading: false };
+        this.state = { header: (<DefaultHeader title={words.SaveCost} />), items: [], ids: [], page: 1, loading: false };
     }
 
     componentWillMount() {
@@ -32,22 +35,27 @@ class Home extends React.Component {
     }
 
     _onPressItem(id, selected) {
+        let ids = [...this.state.ids];
         if (selected) {
-            this.props.selectCostRow(id, this._Delete.bind(this), this.props.resetHeader);
-            this.setState(prev => ({ ...prev, ids: [...prev.ids, id] }));
+            ids.push(id);
+            this.setState(prev => ({ ...prev, header: (<HomeHeader title={words.SaveCost} count={ids.length} delete={this._Delete.bind(this)} />), ids: ids }));
         }
         else {
-            this.props.deselectCostRow(id, this._Delete.bind(this), this.props.resetHeader);
-            this.setState(prev => ({ ...prev, ids: prev.ids.filter(x => x !== id) }));
+            ids = [...ids.filter(x => x !== id)];
+            this.setState(prev => ({ ...prev, ids: ids }));
+            if (ids.length > 0)
+                this.setState(prev => ({ ...prev, header: (<HomeHeader title={words.SaveCost} count={ids.length} delete={this._Delete.bind(this)} />) }));
+            else
+                this.setState(prev => ({ ...prev, header: (<DefaultHeader title={words.SaveCost} />) }));
         }
-
+        this.props.setIds(ids);
     }
 
 
     _Delete() {
         Delete('cost', this.state.ids);
-        this.props.resetHeader();
         this._getCosts(true);
+        this.setState(prev => ({ ...prev, header: (<DefaultHeader title={words.SaveCost} />) }));
     }
 
 
@@ -55,6 +63,7 @@ class Home extends React.Component {
         const data = this.state.items.map(x => ({ ...x, selected: false, key: x.id.toString() }))
         return (
             <Layout>
+                {this.state.header}
                 <View style={{ flex: 1, flexDirection: 'column' }}>
                     <FlatList
                         style={{}}
@@ -82,16 +91,14 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return { ...state.homeReducer };
+    return { ...state};
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        selectCostRow: (id, dlt, reset) => { dispatch(selectCostRow(id, dlt, reset)); },
-        deselectCostRow: (id, dlt, reset) => { dispatch(deselectCostRow(id, dlt, reset)); },
-        resetHeader: () => { dispatch(resetHeader()); }
+        setIds: (ids) => { dispatch(setIds(ids)); },
 
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

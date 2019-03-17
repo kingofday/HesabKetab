@@ -1,9 +1,9 @@
 import React from 'react';
-import { Platform, } from 'react-native';
 import { Icon, Button, View, Text } from 'native-base';
 import { TextField } from 'react-native-materialui-textfield';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { Actions } from 'react-native-router-flux';
+import EStyleSheet from 'react-native-extended-stylesheet';
 //comps
 import BaseLightbox from '../../../shared/comps/light_box/BaseLightBox';
 import { unit } from '../../../Data/domain'
@@ -22,10 +22,9 @@ export default class AddUnitLightBox extends React.Component {
             this.setState(prev => ({ ...prev, errors: { name: words.requiredField } }));
         }
         else {
-            Add(new unit(u.name, u.count), this.props.resetList);
+            Add('unit', new unit(u.name, u.count), () => { this.props.resetList(words.DefineUnit) });
             this.setState(prev => ({ ...prev, errors: { name: '' } }));
             this.inputs[0].clear();
-            // this.close();
             Actions.pop();
         }
     }
@@ -57,6 +56,9 @@ export default class AddUnitLightBox extends React.Component {
                         <View style={{ width: 100, paddingTop: 15, borderBottomWidth: 1.5, borderBottomColor: '#a0afcd', overflow: 'hidden', position: 'absolute', left: 0 }}>
                             <ModalDropdown
                                 style={[{ flexDirection: 'row', justifyContent: 'flex-start' }, commonStyles.fontFa]}
+                                dropdownStyle={{borderTopWidth:2,borderTopColor: EStyleSheet.value('$inputActivecolor'),}}
+                                dropdownTextStyle={{margin:15}}
+                                renderSeparator={()=>(<View></View>)}
                                 options={this._pickerItems()}
                                 defaultValue="1"
                                 defaultIndex={0}
@@ -76,7 +78,7 @@ export default class AddUnitLightBox extends React.Component {
                         <View style={{ paddingTop: 35 }}>
                             <Button small iconLeft info onPress={this._saveUnit.bind(this)}>
                                 <Icon name="md-add" />
-                                <Text style={style}>{words.Submit}</Text>
+                                <Text style={commonStyles.fontFa}>{words.Submit}</Text>
                             </Button>
                         </View>
                     </View>

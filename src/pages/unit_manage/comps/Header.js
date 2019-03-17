@@ -5,13 +5,13 @@ import { Header, Title, Button, Right, Left, Body, Icon, Text } from 'native-bas
 export default class UnitHeader extends React.Component {
     render() {
         return (<Header>
-            <Left style={{ padding: 7.5 }}>
+            <Left style={{ flex: 0.2, padding: 7.5 }}>
                 <Text style={{ color: '#ffffff' }}>({this.props.count})</Text>
             </Left>
-            <Body style={{ alignItems: 'center' }}>
+            <Body style={{ flex: 0.6, alignItems: 'center' }}>
                 <Title>{this.props.title}</Title>
             </Body>
-            <Right style={{ padding: 7.5 }}>
+            <Right style={{ flex: 0.2, padding: 7.5 }}>
                 <Button transparent onPress={() => this.props.delete()}>
                     <Icon name='trash' />
                 </Button>
