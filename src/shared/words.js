@@ -16,4 +16,5 @@ export default words = {
     InvalidPrice: 'مقدار ورودی معتبر نیست',
     CostShare:'سهم هزینه',
     MoneyCurrency:'تومان',
+    MoreApps:'اپ های رایگان',
 }

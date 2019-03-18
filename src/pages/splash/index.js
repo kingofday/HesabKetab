@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, ActivityIndicator, TouchableOpacity,Image, Linking } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 
 //comps
@@ -30,7 +29,7 @@ export default class Splash extends React.Component {
 
                 <TouchableOpacity style={{ flex: 0.5, paddingBottom: 10,alignItems: 'center', justifyContent: 'flex-end' }} onPress={() => { this._redirectToKingofday() }}>
                     <Image source={require('../../../src/assets/images/kingofday.png')}/>
-                    <Text style={{ color: 'white' }}>Kingofday.ir</Text>
+                    <Text style={[{ color: 'white' }, commonStyles.fontFa]}>{words.MoreApps}</Text>
                 </TouchableOpacity >
             </LinearGradient>
         );
