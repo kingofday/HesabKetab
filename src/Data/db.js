@@ -1,5 +1,4 @@
 import { openDatabase } from 'react-native-sqlite-storage';
-import { Alert } from 'react-native';
 var okCallback = function (p) {
   console.log('db-->okCallback: opt is successful');
 }
@@ -13,7 +12,6 @@ var db = openDatabase({ name: 'HK.db', createFromLocation: 1 }, okCallback, erro
 export const Add = (tbl, item, success, fail) => {
   let keys = Object.keys(item).filter(x => x != 'id');
   db.transaction(function (tx) {
-    // tx.executeSql('delete from unit');
     tx.executeSql(
       `INSERT INTO ${tbl} (${keys.toString()}) VALUES (${keys.map(x => '?').toString()})`,
       keys.map(x => item[x]),

@@ -2,8 +2,8 @@ import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 
 //comps
-import homeReducer from '../pages/home/reducer';
-import resultReducer from '../pages/result/reducer';
+import homeReducer from '../components/home/reducer';
+import resultReducer from '../components/result/reducer';
 
 const appReducers = combineReducers({
   homeReducer,

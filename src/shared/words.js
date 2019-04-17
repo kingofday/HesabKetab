@@ -17,4 +17,6 @@ export default words = {
     CostShare:'سهم هزینه',
     MoneyCurrency:'تومان',
     MoreApps:'اپ های رایگان',
+    CalcResult:'سهم هر واحد',
+    OrderApp:'سفارش اپ'
 }
